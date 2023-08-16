@@ -2,5 +2,5 @@
 int main()
 {
 
-	printf("Hello world");
+	printf("Windows ki ma ki chut");
 }
