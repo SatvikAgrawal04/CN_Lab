@@ -20,7 +20,7 @@ int main()
 	struct sockaddr_in connect_sock;
 	connect_sock.sin_port = htons(6900);
 	connect_sock.sin_family = AF_INET;
-	int ret = inet_aton("10.7.110.149", &connect_sock.sin_addr);
+	int ret = inet_aton("192.168.101.141", &connect_sock.sin_addr);
 
 	int conn_ret = connect(sockfd, (const struct sockaddr *)&connect_sock, sizeof(connect_sock));
 
