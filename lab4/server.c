@@ -37,13 +37,17 @@ int main()
 		printf("Error in listen");
 		exit(0);
 	}
+	int ct = 0;
 	while (1)
 	{
 		struct sockaddr_in accept_sock;
 		int accept_sock_size = sizeof(accept_sock);
 		int accept_fd = accept(sockfd, (struct sockaddr *)&accept_sock, &accept_sock_size);
 		if (accept_fd)
+		{
 			printf("\nNew client connected...\n");
+			ct++;
+		}
 		if (accept_fd == -1)
 		{
 			printf("Error in accept");
@@ -57,7 +61,10 @@ int main()
 			recv_buf[ret] = '\0';
 			printf("message: %s\n", recv_buf);
 			if (!strcmp(recv_buf, "bye"))
+			{
 				break;
+				printf("Client %d disconnected\n", ct);
+			}
 
 			char send_buf[100];
 			printf("Enter message: \n");

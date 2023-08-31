@@ -57,6 +57,7 @@ int main()
 
 		char recv_buf[100];
 		int rec_ret = recvfrom(sockfd, recv_buf, sizeof(recv_buf), 0, (struct sockaddr *)&recv_sock, &len);
+		recv_buf[rec_ret] = '\0';
 		if (rec_ret == -1)
 		{
 			printf("Error in recvfrom");

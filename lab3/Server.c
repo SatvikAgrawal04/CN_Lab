@@ -69,4 +69,15 @@ int main()
 	}
 
 	close(sockfd);
+	return 0;
 }
+
+/*
+socket()
+bind()
+listen()
+accept()
+recv()
+send()
+close()
+*/

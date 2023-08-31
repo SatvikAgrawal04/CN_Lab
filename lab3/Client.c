@@ -48,3 +48,10 @@ int main()
 
 	close(sockfd);
 }
+
+/*
+socket()
+connect()
+send()
+recv()
+*/
