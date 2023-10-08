@@ -7,8 +7,6 @@
 #include <netinet/ip.h>
 #include <unistd.h>
 #include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 
 int main()
 {
@@ -22,7 +20,7 @@ int main()
 	struct sockaddr_in bind_sock;
 	bind_sock.sin_port = htons(6900);
 	bind_sock.sin_family = AF_INET;
-	int ret = inet_aton("192.168.101.141", &bind_sock.sin_addr);
+	int ret = inet_aton("192.168.255.141", &bind_sock.sin_addr);
 
 	int bind_ret = bind(sockfd, (const struct sockaddr *)&bind_sock, sizeof(bind_sock));
 	if (bind_ret == -1)
