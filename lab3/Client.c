@@ -22,6 +22,11 @@ int main()
 	connect_sock.sin_addr.s_addr = INADDR_ANY;
 
 	int conn_ret = connect(sockfd, (const struct sockaddr *)&connect_sock, sizeof(connect_sock));
+	if (conn_ret == -1)
+	{
+		print("Error in connect\n");
+		exit(0);
+	}
 
 	while (1)
 	{
