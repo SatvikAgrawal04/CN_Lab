@@ -21,7 +21,7 @@ int main()
 	struct sockaddr_in connect_sock;
 	connect_sock.sin_port = htons(8000);
 	connect_sock.sin_family = AF_INET;
-	int ret = inet_aton("192.168.255.141", &connect_sock.sin_addr);
+	connect_sock.sin_addr.s_addr = INADDR_ANY;
 
 	int conn_ret = connect(sockfd, (const struct sockaddr *)&connect_sock, sizeof(connect_sock));
 
