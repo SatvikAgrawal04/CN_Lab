@@ -20,7 +20,7 @@ int main()
 	}
 
 	struct sockaddr_in connect_sock;
-	connect_sock.sin_port = htons(5000);
+	connect_sock.sin_port = htons(8000);
 	connect_sock.sin_family = AF_INET;
 	int ret = inet_aton("192.168.255.141", &connect_sock.sin_addr);
 
@@ -30,7 +30,7 @@ int main()
 	{
 		char send_buf[100];
 		printf("Enter message: \n");
-		scanf("\n%s", send_buf);
+		fgets(send_buf, 100, stdin);
 		send(sockfd, send_buf, strlen(send_buf), 0);
 		if (!strcmp(send_buf, "bye"))
 			break;
@@ -38,7 +38,7 @@ int main()
 		char recv_buf[100];
 		int ret = recv(sockfd, recv_buf, sizeof(recv_buf), 0);
 		recv_buf[ret] = '\0';
-		printf("message: %s\n", recv_buf);
+		printf("message from: %s\n", recv_buf);
 	}
 
 	close(sockfd);

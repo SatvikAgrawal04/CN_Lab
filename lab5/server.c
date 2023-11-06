@@ -20,7 +20,7 @@ int main()
 	}
 
 	struct sockaddr_in bind_sock;
-	bind_sock.sin_port = htons(5000);
+	bind_sock.sin_port = htons(8000);
 	bind_sock.sin_family = AF_INET;
 	int ret = inet_aton("192.168.255.141", &bind_sock.sin_addr);
 
@@ -37,13 +37,17 @@ int main()
 		printf("Error in listen");
 		exit(0);
 	}
+	int ct = 0;
 	while (1)
 	{
 		struct sockaddr_in accept_sock;
 		int accept_sock_size = sizeof(accept_sock);
 		int accept_fd = accept(sockfd, (struct sockaddr *)&accept_sock, &accept_sock_size);
 		if (accept_fd)
+		{
 			printf("\nNew client connected...\n");
+			ct++;
+		}
 		if (accept_fd == -1)
 		{
 			printf("Error in accept");
@@ -59,13 +63,16 @@ int main()
 				char recv_buf[100];
 				int ret = recv(accept_fd, recv_buf, sizeof(recv_buf), 0);
 				recv_buf[ret] = '\0';
-				printf("message: %s\n", recv_buf);
+				printf("messagefrom client %d: %s\n", ct, recv_buf);
 				if (!strcmp(recv_buf, "bye"))
+				{
 					break;
+					printf("\nclient %d disconnected\n", ct);
+				}
 
 				char send_buf[100];
 				printf("Enter message: \n");
-				scanf("\n%s", send_buf);
+				fgets(send_buf, 100, stdin);
 				send(accept_fd, send_buf, strlen(send_buf), 0);
 			}
 			goto X;
